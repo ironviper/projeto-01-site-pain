@@ -1,0 +1,535 @@
+/* Reset */
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+p, h1 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+}
+
+:root {
+    --black-color: #000000;
+    --red-color: #ED2448;
+    --red-secondary-color: #CC1935;
+    --white-color: #FFFFFF;
+
+    --grey-color-01: #888888;
+    --grey-color-02: #6D6D6D;
+    --grey-color-03: #5D5D5D;
+    --grey-color-04: #363636; /* Background inputs. Background buttons. */
+    --grey-color-05: #2F2F2F;
+    --grey-color-06: #262626; /* Hovered buttons background. */
+    --grey-color-07: #1C1C1C;
+}
+
+
+/*#region GENERAL */
+body {
+    background-color: var(--black-color);
+
+    /*Font adjustments */
+    font-family: 'Poppins', sans-serif;
+    color: var(--white-color);
+}
+
+.section-title {
+    font-size: 4rem;
+}
+
+img {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+/*#endregion */
+
+
+section#first-section {
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    position: relative;
+}
+/*#region Logo container - first section */
+.logo-container {
+    display: flex; /* Needed so the logo can be centered both vertically and horizntally in the page. */
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.logo {
+    width: 25%;
+    height: auto;
+    margin: auto auto; /* Center the logo centered vertically and horizontally. */
+}
+.logo-fade-reveal {
+    position: absolute; /* Needed so it can be in the same space as the logo. And to set its size according to the closest parent with "position: relative" which is ".logo-container". */
+    width: 100%;
+    height: 100%;
+
+    /* Make sure it is centered in ".logo-container". */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    background-image: radial-gradient(hsla(0, 0%, 100%, 0.250) var(--fade-percent-01), rgba(255, 255, 255, 0.220) var(--fade-percent-02), white var(--fade-percent-03),rgba(255, 255, 255, 0.055) var(--fade-percent-04) , black var(--fade-percent-05));
+}
+body:hover .logo-fade-reveal {
+    animation: logo-reveal-animation 2s linear forwards;
+} 
+
+/*#region Logo reveal animation */
+@property --fade-percent-01 {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: -1000%;
+}
+@property --fade-percent-02 {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: -1000%;
+}
+@property --fade-percent-03 {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: -500%;
+}
+@property --fade-percent-04 {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: 0%;
+}
+@property --fade-percent-05 {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: 0%;
+}
+@keyframes logo-reveal-animation {
+    0% {
+        --fade-percent-05: 0%;
+    }
+    50% {
+        --fade-percent-02: -1000%;
+        --fade-percent-03: -500%;
+        --fade-percent-04: 0%;
+    }
+    100% {
+        --fade-percent-02: -500%;
+        --fade-percent-03: -150%;
+        --fade-percent-04: 1%;
+        --fade-percent-05: 35%;
+    }
+}
+/*#endregion*/
+
+/*#endregion */
+
+
+section#second-section {
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    position: relative;
+}
+/*#region About us container - second section */
+.about-us-container {
+    /* Center the ".about-us-container" inside the <section>#second-section, with 50% of its width.  */
+    height: 100%;
+    max-height: 100vh;
+    width: 50%;
+    margin: auto;
+
+    /* Center the <h1> and the <p> inside the ".about-us-container" */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.about-us-container :not(:nth-last-child(1), :nth-last-child(3)){
+    margin-bottom: 5%; /* Add a bottom margin to all children except the last, which is the "#go-pain" and the third to last, which is the last <p> with about us text. */
+}
+.about-us-container p {
+    font-size: 1.25rem;
+    text-align: justify;
+}
+#pain-e-tradicao {
+    margin-top: 2.5%;
+    font-size: 2rem;
+}
+#go-pain {
+    font-size: 10rem; 
+    & span {
+        font-weight: 600;
+    }
+}
+/*#endregion */
+
+
+section#third-section {
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/*#region Players container */
+.players-container {
+    height: fit-content;
+    width: fit-content;
+    margin-top: 5%;
+    margin-bottom: auto;
+
+    /* Center the <h1> and the <p> inside the ".about-us-container" */
+    display: flex;
+
+    flex-direction: row;
+    align-items: center;
+    
+}
+.player-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+.player-card {
+    width: 85%;
+    height: fit-content;
+
+    margin: auto auto;
+
+    position: relative;
+
+    display: grid; /* Use the "display: grid" instead of "display: flex" and "position: relative" here, and "position: absulute" in the children, because "display: grid" can achieve the same desired behavior(".player-card-front" over the ".player-card-back") and still use "height: fit-content" here.  */
+    grid-template-columns: 1fr; /* One column that will take all the available space. */
+    grid-template-rows: 1fr; /* One row that will take all the available space. */
+
+    transform-style: preserve-3d; /* Need to be set in the ".player-card" and in ".player-card-animation-container", because ".player-card-animation-container" is a child of ".player-card" so when ".player-card" is rotated its children get rotated as well. This necessary to make the 3D rotation happen correctly. */
+    perspective: 1250px; /* Necessary for the negative rotations to be correctly displayed.  */
+    
+    transition: transform 0.5s;
+}
+/*#region Infinite animation */
+.player-card-animation-container {
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+
+    transform-style: preserve-3d; /* Need to be set in the ".player-card" and in ".player-card-animation-container", because ".player-card-animation-container" is a child of ".player-card" so when ".player-card" is rotated its children get rotated as well. This necessary to make the 3D rotation happen correctly. */
+
+    animation: card-tilt 2s infinite both linear;
+}
+
+@property --card-tilt-angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 4deg;
+}
+@keyframes card-tilt {
+    0% {
+        transform: rotateX(var(--card-tilt-angle)) rotateY(0deg);
+    }
+    25% {
+        transform: rotateX(0deg) rotateY(var(--card-tilt-angle));
+    }
+    50% {
+        transform: rotateX(calc(var(--card-tilt-angle) * -1)) rotateY(0deg);
+    }
+    75% {
+        transform: rotateX(0deg) rotateY(calc(var(--card-tilt-angle) * -1));
+    }
+    100% {
+        transform: rotateX(var(--card-tilt-angle)) rotateY(0deg);
+    }
+}
+/*#endregion */
+.player-card-front {
+    width: 100%;
+    height: 100%;
+
+    /* Assign the postion in the grid. */
+    grid-row: 1;
+    grid-column: 1;
+
+    z-index: 1; /* To ensure that the ".player-card-front" will be over the ".player-card-back". */
+
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+
+    filter: drop-shadow(0 0 0.75rem var(--red-color));
+}
+.player-card-back {
+    width: 100%;
+    height: 100%;
+
+    /* Assign the postion in the grid. */
+    grid-row: 1;
+    grid-column: 1;
+
+    z-index: 0; /* To ensure that the ".player-card-back" will be under the ".player-card-front". */
+
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+
+    transform: rotateY(180deg);
+
+    filter: drop-shadow(0 0 0.75rem var(--red-color));
+}
+.player-container:hover .player-card { /* Trigger to show the back of the card */
+    transform: rotateY(180deg);
+
+    & .player-card-animation-container {
+        animation-play-state: paused;
+    }
+}
+/*#endregion */
+
+section#fourth-section
+{
+    width: 100%;
+    height: fit-content;
+    position: relative;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.achievements-jersey-container {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+/*#region Jersey + fade */
+.jersey-container {
+    height: 100%;
+    width: 100%;
+
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+
+}
+
+.img-container {
+    height: fit-content;
+    width: fit-content;
+    z-index: 0;
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.img-container > img {
+    height: 45vw;
+    width: auto;
+}
+
+
+.fade {
+    /* #region---Needed to make the .fade div, to be the same size as the image */
+    grid-row: 1;
+    grid-column: 1;
+    z-index: 1;
+    width: 100%; /* Not mandatory but to ensure that the width will be 100% of the image */
+    height: 100%; /* Not mandatory but to ensure that the height will be 100% of the image */
+    /* #endregion */
+
+    /* #region--- Sets the radial gradient for the fade effect */
+    background-image: radial-gradient(circle at 50% var(--grad-percent),transparent 5%, black var(--black-percent));
+    animation: gradient linear both;
+    animation-timeline: view(block);
+    animation-range: cover 0% cover 50%;
+    /* #endregion */
+}
+
+@property --grad-percent {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: 100%;
+}
+@property --black-percent {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: 30%;
+}
+@keyframes gradient {
+    0% {
+        --grad-percent: 100%;
+        --black-percent: 30%;
+    }
+    95% {
+        --black-percent: 40%;
+    }
+    100% {
+        --grad-percent: 30%;
+        --black-percent: 80%;
+    }
+}
+/*#endregion */
+
+
+.achievements-container {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.achievement {
+    height: 95vh;
+    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 8vh;
+
+    h1 {
+        font-size: 4rem;
+    }
+
+    video {
+        height: 100%;
+        margin-top: 3vh;
+    }
+
+}
+
+
+#fifth-section {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+}
+
+
+
+footer {
+
+    background-color: var(--red-color);
+    height: 30vh;
+
+    display: flex;
+    flex-direction: column;
+
+    background-image: linear-gradient(45deg, var(--red-color),var(--black-color) 45%);
+    border-top: white 4px solid;
+
+    div {
+        display: flex;
+
+        width: 100%;
+        height: 100%;
+
+
+        .form-container {
+            width: 50%;
+
+            display: flex;
+            flex-direction: column;
+            margin-left: 5%;
+
+            form {
+                display: flex;
+                flex-direction: column;
+
+                height: 45%;
+
+                div {
+                    display: flex;
+                    align-items: center;
+
+                    font-size: 1.25rem;
+
+                    margin-bottom: 1.5rem;
+
+                    input {
+                        margin-left: 0.25rem;
+                        font-size: inherit;
+                    }
+                }
+                
+                .button-container {
+
+                    button {
+                        width: 10rem;
+                        height: 50px;
+    
+                        border: none;
+
+                        background-color: var(--black-color);
+                        border: 1px white solid;
+
+                        color: white;
+                        font-weight: bold;
+
+                        margin-top: 1.5rem;
+                    }
+                    button:hover {
+                        cursor: pointer;
+                        background-color: var(--red-color);
+                    }
+                    button:active {
+                        background-color: var(--red-secondary-color);
+                    }
+
+                }
+
+            }
+        }
+    
+        .footer-img-container {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding-top: 25px;
+            background-color: var(--black-color);
+
+
+            #imagem-torcida {
+                width: 80%;
+                object-fit: cover;
+                align-self: center;
+                object-position: 0 35%;
+
+                
+            }
+
+        }
+    
+    }
+
+
+    p {
+        text-align: center;
+
+        border-top: white 4px solid;
+
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+    }
+
+
+}
+
